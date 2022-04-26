@@ -1,0 +1,41 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Pretendard-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+}
+
+html, body { width: 100%; height: 100%; --webkit-touch-callout: none; }
+html, body, form, fieldset, img { margin: 0; padding: 0; border: none; }
+p, h1, h2, h3 { margin: 0.1em; padding: 0; border: 0; }
+ul, dl, dt, dd { margin: 0; padding: 0; list-style: none; }
+a { display: inline-block; color: #000; text-decoration: none; }
+*, :after, :before { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
+input { -webkit-border-radius: 0; -webkit-appearance: none; }
+input:checked[type="checkbox"] { background: #ffffff; -webkit-appearance: checkbox; }
+img { width: 100%; }
+body { position: relative; padding-top: 56px; font-family: Pretendard-Regular, -apple-system, BlinkMacSystemFont, "Segoe UI",  "맑은 고딕", "Malgun Gothic",
+Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+"Segoe UI Symbol"; font-weight: 400; background-color: #f9f9f9; overflow-x: hidden; }
+
+.mb3 { margin-bottom: 3px; }
+.mb5 { margin-bottom: 5px; }
+.bold { font-family: "Pretendard-Bold"; font-weight: bold; }
+
+.navbar { display: flex; position: fixed; top: 0; left: 0; right: 0; z-index: 9999; align-items: center; padding: 10px 0; background-color: #ffffff; border-bottom: 1px solid #f4f5f5; }
+.navbar .title-container { justify-content: center; flex: 1; text-align: center; }
+.navbar .title-container span { font-size: 17px; color: #424754; }
+
+.container { position: relative; width: 100%; max-width: 600px; height: 100%; display: flex; flex-direction: column; margin: 0 auto; padding: 0 30px; justify-content: center; text-align: center; font-size: 14px; color: #81848e; }
+.container .content { display: flex; flex-direction: column; justify-content: center; }
+.container .content .item { display: flex; border-bottom: 1px solid #424754; border-right: 1px solid #424754; }
+.container .content .item > div { display: inline-flex; border-top: 1px solid #424754; border-left: 1px solid #424754; padding: 5px 0; }
+.container .content .item .type { flex-basis: 20%; justify-content: center; }
+.container .content .item .name { padding-left: 10px; flex-basis: 80%; }
