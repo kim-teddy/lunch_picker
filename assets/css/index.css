@@ -27,6 +27,7 @@ Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "
 
 .mb3 { margin-bottom: 3px; }
 .mb5 { margin-bottom: 5px; }
+.w100 { width: 100%; }
 .bold { font-family: "Pretendard-Bold"; font-weight: bold; }
 
 .navbar { display: flex; position: fixed; top: 0; left: 0; right: 0; z-index: 9999; align-items: center; padding: 10px 0; background-color: #ffffff; border-bottom: 1px solid #f4f5f5; }

@@ -4,11 +4,6 @@ const FOOD_TYPE_JAPANESE = "japanese"
 const FOOD_TYPE_CHINESE = "chinese";
 const FOOD_TYPE_FASTFOOD = "fastfood";
 
-// Random Result Set
-let resultCount = 0;
-const resultMaxSize = 5;
-const result = [];
-
 const list = [
     {
         type: FOOD_TYPE_FASTFOOD,
@@ -41,44 +36,54 @@ const list = [
     }
 ];
 
-while (resultCount < resultMaxSize) {
-    const randomTypeValue = list[Math.floor(Math.random() * list.length)];
-    const targetType = randomTypeValue.type;
-    const targetItem = randomTypeValue.item;
+const result = [];
 
-    const pickedItem = targetItem[Math.floor(Math.random() * targetItem.length)];
+const getRandomResult = () => {
+    result.length = 0;
 
-    // 같은 타입의 음식이 2개까지만 선택되도록 예외 처리
-    const checkDuplicateType = result.filter(item => {
-        return item.type === targetType;
-    });
+    // Random Result Set
+    let resultCount = 0;
+    const resultMaxSize = 5;
 
-    if (checkDuplicateType.length > 1) {
-        continue;
+    while (resultCount < resultMaxSize) {
+        const randomTypeValue = list[Math.floor(Math.random() * list.length)];
+        const targetType = randomTypeValue.type;
+        const targetItem = randomTypeValue.item;
+
+        const pickedItem = targetItem[Math.floor(Math.random() * targetItem.length)];
+
+        // 같은 타입의 음식이 2개까지만 선택되도록 예외 처리
+        const checkDuplicateType = result.filter(item => {
+            return item.type === targetType;
+        });
+
+        if (checkDuplicateType.length > 1) {
+            continue;
+        }
+
+        // 동일 식당은 결과에서 제외하는 로직
+        const checkDuplicateItem = result.filter(item => {
+            return item.type === targetType && item.name === pickedItem;
+        });
+
+        if (checkDuplicateItem.length > 0) {
+            continue;
+        }
+
+        result.push({
+            type: targetType,
+            name: pickedItem,
+        });
+
+        resultCount++;
     }
 
-    // 동일 식당은 결과에서 제외하는 로직
-    const checkDuplicateItem = result.filter(item => {
-        return item.type === targetType && item.name === pickedItem;
+    result.sort((a, b) => {
+        return a.type === b.type ? 0 : 1;
     });
-
-    if (checkDuplicateItem.length > 0) {
-        continue;
-    }
-
-    result.push({
-        type: targetType,
-        name: pickedItem,
-    });
-
-    resultCount++;
 }
 
-result.sort((a, b) => {
-    return a.type === b.type ? 0 : 1;
-});
-
-document.addEventListener("DOMContentLoaded", function(){
+const renderRandomResult = () => {
     const container = document.querySelector('.container .content');
     const template = document.querySelector('#item__template').innerHTML;
 
@@ -90,4 +95,12 @@ document.addEventListener("DOMContentLoaded", function(){
     }
 
     container.innerHTML = html;
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    const refreshButton = document.querySelector('.container .refresh-button');
+    refreshButton.addEventListener("click", () => {
+        getRandomResult();
+        renderRandomResult();
+    });
 });
