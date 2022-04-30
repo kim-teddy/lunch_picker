@@ -18,7 +18,11 @@
 
     <div class="container">
         <div class="content">
-
+            <div class="slot-machine__container">
+                <ul class="list">
+                    <li class="item">메뉴를 랜덤으로 골라 보세요</li>
+                </ul>
+            </div>
         </div>
 
         <div class="button-container">
@@ -39,4 +43,8 @@
         <span>{name}</span>
     </div>
 </div>
+</script>
+
+<script type="text/template" id="slot-item__template">
+    <li class="item">[{type}] {name}</li>
 </script>

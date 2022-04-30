@@ -11,6 +11,8 @@ const list = [
             "맥도날드",
             "롯데리아",
             "서브웨이",
+            "버거킹",
+            "샐러디",
         ]
     },
     {
@@ -18,14 +20,20 @@ const list = [
         item: [
             "천용",
             "예림",
+            "마라테이블",
         ]
     },
     {
         type: FOOD_TYPE_KOREAN,
         item: [
             "수랏간",
-            "명동손칼국수",
+            "명동칼국수샤브샤브",
             "매반생면",
+            "백암순대/감자탕",
+            "복이네",
+            "신의주순대와 쭈꾸미",
+            "천하일품추어탕",
+            "깐부치킨",
         ],
     },
     {
@@ -37,6 +45,51 @@ const list = [
 ];
 
 const result = [];
+
+const shuffleArray = (array) => {
+    // array.sort(() => Math.random() - 1);
+    for (let index = array.length - 1; index > 0; index--) {
+        const randomPosition = Math.floor(Math.random() * (index + 1));
+        const temporary = array[index];
+        array[index] = array[randomPosition];
+        array[randomPosition] = temporary;
+    }
+}
+
+const composeRandomList = () => {
+    // 초기화
+    result.length = 0;
+
+    list.forEach(category => {
+        category.item.forEach(item => {
+            result.push({
+                type: category.type,
+                name: item.toString(),
+            });
+        })
+    })
+
+    shuffleArray(result);
+}
+
+const renderRandomList = () => {
+    const container = document.querySelector(".slot-machine__container .list");
+    const template = document.querySelector("#slot-item__template").innerHTML;
+
+    let html = '';
+    for (let i = 0; i < result.length; i++) {
+        html += template
+            .replace(/{type}/g, result[i].type)
+            .replace(/{name}/g, result[i].name);
+    }
+
+    container.innerHTML = html;
+
+    container.classList.remove("rolling");
+    setTimeout(() => {
+        container.classList.add("rolling");
+    }, 0);
+}
 
 const getRandomResult = () => {
     result.length = 0;
@@ -100,7 +153,7 @@ const renderRandomResult = () => {
 document.addEventListener("DOMContentLoaded", function() {
     const refreshButton = document.querySelector('.container .refresh-button');
     refreshButton.addEventListener("click", () => {
-        getRandomResult();
-        renderRandomResult();
+        composeRandomList();
+        renderRandomList();
     });
 });
