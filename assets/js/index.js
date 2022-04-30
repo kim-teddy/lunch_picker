@@ -56,10 +56,15 @@ const shuffleArray = (array) => {
     }
 }
 
-const composeRandomList = () => {
+const initRandomList = () => {
     // 초기화
     result.length = 0;
 
+    const bonusPickContainer = document.querySelector(".bonus-pick__container");
+    bonusPickContainer.innerHTML = '';
+}
+
+const composeRandomList = () => {
     list.forEach(category => {
         category.item.forEach(item => {
             result.push({
@@ -76,10 +81,12 @@ const renderRandomList = () => {
     const container = document.querySelector(".slot-machine__container .list");
     const template = document.querySelector("#slot-item__template").innerHTML;
 
+    const bonusPickContainer = document.querySelector(".bonus-pick__container");
+    const bonusPickTemplate = document.querySelector("#bonus-pick__item__template").innerHTML;
+
     let html = '';
     for (let i = 0; i < result.length; i++) {
         html += template
-            .replace(/{type}/g, result[i].type)
             .replace(/{name}/g, result[i].name);
     }
 
@@ -89,6 +96,14 @@ const renderRandomList = () => {
     setTimeout(() => {
         container.classList.add("rolling");
     }, 0);
+
+    // Bonus Pick
+    if (result.length > 1) {
+        setTimeout(() => {
+            bonusPickContainer.innerHTML =
+                bonusPickTemplate.replace(/{name}/g, result[1].name);
+        }, 5000);
+    }
 }
 
 const getRandomResult = () => {
@@ -153,6 +168,7 @@ const renderRandomResult = () => {
 document.addEventListener("DOMContentLoaded", function() {
     const refreshButton = document.querySelector('.container .refresh-button');
     refreshButton.addEventListener("click", () => {
+        initRandomList();
         composeRandomList();
         renderRandomList();
     });
