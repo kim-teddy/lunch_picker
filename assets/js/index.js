@@ -26,6 +26,7 @@ const list = [
     {
         type: FOOD_TYPE_KOREAN,
         item: [
+            "더드림김치찌개요리점",
             "수랏간",
             "명동칼국수샤브샤브",
             "매반생면",
@@ -74,7 +75,9 @@ const composeRandomList = () => {
         })
     })
 
-    shuffleArray(result);
+    for (let i = 0; i < 50; i++) {
+        shuffleArray(result);
+    }
 }
 
 const renderRandomList = () => {
